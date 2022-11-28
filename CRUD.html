@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <body>
+            <h3>Vaibhav Srivastava</h3>
+            
+            <input type="text" id="sname" name="sname" class="form_control">
+            <button type="button" id="add_Button">Add</button>
+            <ul id="parentLIst" class="unOrder">
+                <li class="list"><h3 class="headingH">Coffee</h3>
+                    <button class="Edit" id="Edit" onclick="editList(this)">Edit</button>
+                    <button class="Remove" id="Remove" onclick="RemoveLi(this)">Remove</button>
+                </li>
+
+            </ul>
+
+            <script>
+                let addButton=document.getElementById('add_Button')
+                addButton.addEventListener("click", function() {
+                    let subName=document.getElementById('sname').value;
+                console.log(subName)
+                let newli=document.createElement('li')
+                // newli.classList.add('list')
+                newli.className="list"
+                newli.innerHTML=  `<h3>${subName}</h3>
+                    <button class="Edit" id="Edit"  onclick="editList(this)">Edit</button>
+                    <button class="Remove" id="Remove" onclick="RemoveLi(this)">Remove</button>`
+                let parentLIst=document.getElementById('parentLIst')
+                parentLIst.appendChild(newli)
+
+});
+
+              function RemoveLi(currElement){
+                // console.log(currElement)
+                console.log(currElement.parentElement)
+                // let subName=document.getElementById('sname').value;
+                // subName.parentElement.remove()
+                currElement.parentElement.remove()
+              }
+
+              function editList(currElement){
+                if(currElement.textContent=='done'){
+                    currElement.textContent="Edit"
+                    let currentListName= currElement.previousElementSibling.value
+                    let currHeading= document.createElement('h3');
+                    currHeading.className='headingH'
+                    currHeading.textContent=currentListName
+                    currElement.parentElement.replaceChild(currHeading, currElement.previousElementSibling)
+
+                }
+                else{
+
+                
+                currElement.textContent="done"
+                console.log(currElement.previousElementSibling)
+                let currentListName= currElement.previousElementSibling.textContent
+                let currInput= document.createElement('input');
+                currInput.type='text'
+                currInput.placeholder='cookie'
+                currInput.className='form_control'
+                currInput.value= currentListName
+                currElement.parentElement.replaceChild(currInput, currElement.previousElementSibling)
+                }
+
+              }
+
+
+            </script>
+
+        </body>
+    </head>
+</html>
